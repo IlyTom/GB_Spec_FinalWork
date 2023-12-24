@@ -1,0 +1,30 @@
+  476  cat > Pets.txt
+  477  cat > Pack-animals.txt
+  478  ls
+  479  cat Pets.txt Pack-animals.txt > Human-friends.txt
+  480  ls
+  481  cat Human-friends.txt 
+  482  mkdir GBFinalWork
+  483  mv Human-friends.txt GBFinalWork/
+  484  cd GBFinalWork/
+  485  git init
+  486  git add Human-friends.txt 
+  487  tasks 1-2"
+  488  cd GBFinalWork/
+  489  git commit -m "Tasks 1-2"
+  490  git config user.email "ilytoma@mail.ru"
+  491  git config.name "ilya"
+  492  git config user.name "ilya"
+  493  git commit -m "Tasks 1-2"
+  494  sudo dpkg -i ~/Загрузки/mysql-apt-config_0.8.29-1_all.deb
+  495  sudo apt update
+  496  sudo apt install mysql-server mysql-client
+  497  mysql
+  498  sudo mysql
+  499  sudo dkpg -i ~/Загрузки/opera-stable_106.0.4998.19_amd64.deb 
+  500  sudo dpkg -i ~/Загрузки/opera-stable_106.0.4998.19_amd64.deb 
+  501  sudo apt update
+  502  sudo dpkg -r opera-stable
+  503  history
+  504  cd GBFinalWork/
+  505  history > historyCmd.txt
