@@ -26,6 +26,8 @@ CREATE TABLE `Camels` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
   `Pack_animals_ID` int DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Pack_animals_ID` (`Pack_animals_ID`),
   CONSTRAINT `Camels_ibfk_1` FOREIGN KEY (`Pack_animals_ID`) REFERENCES `Pack_animals` (`ID`)
@@ -52,6 +54,8 @@ CREATE TABLE `Cats` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
   `Pets_ID` int DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Pets_ID` (`Pets_ID`),
   CONSTRAINT `Cats_ibfk_1` FOREIGN KEY (`Pets_ID`) REFERENCES `Pets` (`ID`)
@@ -78,6 +82,8 @@ CREATE TABLE `Dogs` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
   `Pets_ID` int DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Pets_ID` (`Pets_ID`),
   CONSTRAINT `Dogs_ibfk_1` FOREIGN KEY (`Pets_ID`) REFERENCES `Pets` (`ID`)
@@ -104,6 +110,8 @@ CREATE TABLE `Donkeys` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
   `Pack_animals_ID` int DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Pack_animals_ID` (`Pack_animals_ID`),
   CONSTRAINT `Donkeys_ibfk_1` FOREIGN KEY (`Pack_animals_ID`) REFERENCES `Pack_animals` (`ID`)
@@ -130,6 +138,8 @@ CREATE TABLE `Hamsters` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
   `Pets_ID` int DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Pets_ID` (`Pets_ID`),
   CONSTRAINT `Hamsters_ibfk_1` FOREIGN KEY (`Pets_ID`) REFERENCES `Pets` (`ID`)
@@ -156,6 +166,8 @@ CREATE TABLE `Horses` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
   `Pack_animals_ID` int DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`),
   KEY `Pack_animals_ID` (`Pack_animals_ID`),
   CONSTRAINT `Horses_ibfk_1` FOREIGN KEY (`Pack_animals_ID`) REFERENCES `Pack_animals` (`ID`)
@@ -181,6 +193,8 @@ DROP TABLE IF EXISTS `Pack_animals`;
 CREATE TABLE `Pack_animals` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -204,6 +218,8 @@ DROP TABLE IF EXISTS `Pets`;
 CREATE TABLE `Pets` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) DEFAULT NULL,
+  `Command` varchar(255) DEFAULT NULL,
+  `Birthday` date DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -226,4 +242,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-24 18:18:48
+-- Dump completed on 2023-12-24 18:41:50
