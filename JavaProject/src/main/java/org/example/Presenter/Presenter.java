@@ -7,6 +7,7 @@ import org.example.Model.Animals.AnimalsType;
 import org.example.Model.Builder.AnimalBuilder;
 import org.example.View.View;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 public class Presenter {
@@ -25,32 +26,27 @@ public class Presenter {
         String date = view.setBirthDate();
         List<String> commands = view.setCommands();
         String type = view.setType();
-        if (type == "Dog"){
+        if (type == "Dog") {
             model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Dog).build());
-        }
-        else if (type == "Cat"){
+        } else if (type == "Cat") {
             model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Cat).build());
-        }
-        else if (type == "Hamster"){
+        } else if (type == "Hamster") {
             model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Hamster).build());
-        }
-        else if (type == "Horse"){
+        } else if (type == "Horse") {
             model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Horse).build());
-        }
-        else if (type == "Camel"){
+        } else if (type == "Camel") {
             model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Camel).build());
-        }
-        else if (type == "Donkey"){
+        } else if (type == "Donkey") {
             model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Donkey).build());
         }
     }
 
-    public void createTable(){
-        String[] columnNames = {"id","Name","BirthDate","Type","Commands"};
+    public void createTable() {
+        String[] columnNames = {"id", "Name", "BirthDate", "Type", "Commands"};
         List<Animals> data = model.getAnimals();
 
         Object[][] tableData = new Object[data.size()][5];
-        for (int i =0;i<data.size();i++){
+        for (int i = 0; i < data.size(); i++) {
             Animals animal = data.get(i);
             tableData[i][0] = data.indexOf(animal);
             tableData[i][1] = animal.getName();
@@ -63,11 +59,11 @@ public class Presenter {
         view.showTable(tableData, columnNames);
     }
 
-    public void start(){
-        while(true){
+    public void start() throws FileNotFoundException {
+        while (true) {
             view.showMenu();
             int menuItem = view.selectMenuItem();
-            switch (menuItem){
+            switch (menuItem) {
                 case 1:
                     addAnimal();
                     break;
@@ -79,7 +75,17 @@ public class Presenter {
                     createTable();
                     break;
                 case 4:
-                    //toJson();
+                    writeToJsonFile();
+                    view.toJsonSave();
+                    break;
+                case 5:
+                    model.getAnimals().clear();
+                    model.getAnimals().addAll(model.ToList(readFromJsonFile()));
+                    view.fromJsonFile();
+                    break;
+                case 6:
+
+                    System.exit(0);
                     break;
                 default:
                     break;
@@ -87,16 +93,27 @@ public class Presenter {
         }
     }
 
-    public void addCommand(){
+    public void addCommand() {
         int indexAnimal = view.selectAnimalId(model.getAnimals().size());
         List<String> command = view.setCommands();
-        if (model.getAnimals().get(indexAnimal).getCommands().addAll(command)){
+        if (model.getAnimals().get(indexAnimal).getCommands().addAll(command)) {
             view.successfulAddCommand();
-        }
-        else {
+        } else {
             view.failedAddCommand();
         }
 
+    }
+
+    public String toJson() {
+        return model.toJsonStr(model.getAnimals());
+    }
+
+    public void writeToJsonFile() {
+        model.writeToJsonFile(toJson());
+    }
+
+    public String readFromJsonFile() throws FileNotFoundException {
+        return model.readFromJsonFile();
     }
 
 

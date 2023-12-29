@@ -1,5 +1,9 @@
 package org.example.View;
 
+import org.example.Model.Animals.Animals;
+import org.example.Model.Animals.AnimalsType;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -14,15 +18,27 @@ public class View {
 
     public String setBirthDate() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите дату рождения животного (День-месяц-год): ");
+        System.out.println("Введите дату рождения животного (День/месяц/год): ");
         String date = scanner.nextLine();
-        return date;
+        while (true) {
+            if (isValidFormat("dd/MM/yyyy", date)) {
+                return date;
+            } else {
+                System.out.println("Введите дату рождения животного в првильном формате (День/месяц/год): ");
+                date = scanner.nextLine();
+            }
+        }
     }
 
     public String setType() {
         Scanner scanner = new Scanner(System.in);
+        System.out.println("Доступны на данный момент типы животных: ");
+        for (AnimalsType animalsType : AnimalsType.values()) {
+            System.out.print(animalsType + " ");
+        }
+        System.out.println();
+        System.out.println("Введите тип животного: ");
         while (true) {
-            System.out.println("Введите тип животного: ");
             String typeAnimal = scanner.nextLine();
             for (ViewText.AnimalType type : ViewText.AnimalType.values()) {
                 if (type.name().equals(typeAnimal)) {
@@ -38,9 +54,9 @@ public class View {
         List<String> commands = new ArrayList<>();
         while (true) {
             int i = commands.size();
-            System.out.printf("Введите %s команду животного: ",i);
+            System.out.printf("Введите %s команду животного или exit (для завершения ввода): ", i);
             String command = scanner.nextLine();
-            if (command.equals("exit")) {
+            if (command.toLowerCase().equals("exit")) {
                 return commands;
             } else {
                 commands.add(command);
@@ -49,8 +65,7 @@ public class View {
     }
 
 
-
-    public void showTable(Object[][] tableData, String[] columnNames){
+    public void showTable(Object[][] tableData, String[] columnNames) {
         System.out.println("=".repeat(50));
         int[] maxLengths = new int[columnNames.length];
         for (int i = 0; i < columnNames.length; i++) {
@@ -80,23 +95,30 @@ public class View {
         System.out.println("=".repeat(50));
     }
 
-    public void showMenu(){
+    public void showMenu() {
         System.out.println(ViewText.mainMenu);
     }
 
-    public int selectMenuItem(){
+    public int selectMenuItem() {
         System.out.println(ViewText.selectMenuItem);
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();
-        return i;
+        while (true) {
+            if (i < 1 || i > 6) {
+                System.out.println("Введите правильный номер меню (1-6): ");
+                i = scanner.nextInt();
+            } else {
+                return i;
+            }
+        }
     }
 
-    public int selectAnimalId(int maxSize){
+    public int selectAnimalId(int maxSize) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите id питомца: ");
         int id = scanner.nextInt();
-        while (true){
-            if (id < 0 || id > maxSize){
+        while (true) {
+            if (id < 0 || id > maxSize) {
                 System.out.println("Введите правильный id питомца: ");
                 id = scanner.nextInt();
             } else {
@@ -104,12 +126,37 @@ public class View {
             }
         }
     }
-    public void successfulAddCommand(){
+
+    public void successfulAddCommand() {
         System.out.println(ViewText.successfulAddCommand);
     }
 
-    public void failedAddCommand(){
+    public void failedAddCommand() {
         System.out.println(ViewText.failedAddCommand);
+    }
+
+    public void toJsonSave() {
+        System.out.println("=".repeat(50));
+        System.out.println(ViewText.toJsonSave);
+        System.out.println("=".repeat(50));
+    }
+
+    public void fromJsonFile() {
+        System.out.println("=".repeat(50));
+        System.out.println(ViewText.fromJsonFile);
+        System.out.println("=".repeat(50));
+    }
+
+    public boolean isValidFormat(String formatDate, String value) {
+        SimpleDateFormat sdf = new SimpleDateFormat(formatDate);
+        sdf.setLenient(false);
+        try {
+            sdf.parse(value);
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
     }
 
 }

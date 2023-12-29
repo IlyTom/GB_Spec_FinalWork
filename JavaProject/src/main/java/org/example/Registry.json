@@ -1,0 +1,39 @@
+[{
+  "name": "Penni",
+  "BirthDate": "12/08/2023",
+  "Commands": [
+    "Eat",
+    "Sleep"
+  ],
+  "Type": "Hamster"
+},{
+  "name": "Canny",
+  "BirthDate": "12/04/2015",
+  "Commands": [
+    "Run",
+    "Eat",
+    "Sleep",
+    "Freeze"
+  ],
+  "Type": "Dog"
+},{
+  "name": "Alen",
+  "BirthDate": "15/11/2021",
+  "Commands": [
+    "Sleep",
+    "Eat",
+    "Sharpen"
+  ],
+  "Type": "Cat"
+},{
+  "name": "Thunder",
+  "BirthDate": "14/07/2022",
+  "Commands": [
+    "Run",
+    "Eat",
+    "Sleep",
+    "Jump",
+    "Gallop"
+  ],
+  "Type": "Horse"
+}]
