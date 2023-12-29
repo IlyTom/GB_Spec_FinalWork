@@ -1,6 +1,7 @@
 package org.example.Presenter;
 
 
+import org.example.Counter;
 import org.example.Model.AnimalRegistry.AnimalRegistry;
 import org.example.Model.Animals.Animals;
 import org.example.Model.Animals.AnimalsType;
@@ -21,24 +22,34 @@ public class Presenter {
         this.model = model;
     }
 
-    public void addAnimal() {
-        String name = view.setName();
-        String date = view.setBirthDate();
-        List<String> commands = view.setCommands();
-        String type = view.setType();
-        if (type == "Dog") {
-            model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Dog).build());
-        } else if (type == "Cat") {
-            model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Cat).build());
-        } else if (type == "Hamster") {
-            model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Hamster).build());
-        } else if (type == "Horse") {
-            model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Horse).build());
-        } else if (type == "Camel") {
-            model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Camel).build());
-        } else if (type == "Donkey") {
-            model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Donkey).build());
+    public int addAnimal() {
+        try (Counter counter = new Counter()) {
+            String name = view.setName();
+            String date = view.setBirthDate();
+            List<String> commands = view.setCommands();
+            String type = view.setType();
+            if ((name != null) && (date != null) && !commands.isEmpty()) {
+                if (type == "Dog") {
+                    model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Dog).build());
+                } else if (type == "Cat") {
+                    model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Cat).build());
+                } else if (type == "Hamster") {
+                    model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Hamster).build());
+                } else if (type == "Horse") {
+                    model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Horse).build());
+                } else if (type == "Camel") {
+                    model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Camel).build());
+                } else if (type == "Donkey") {
+                    model.addAnimal(builderAnimal.setName(name).setBirthDate(date).setCommands(commands).setType(AnimalsType.Donkey).build());
+                }
+                counter.increment();
+                view.successfulAddCommand();
+                return counter.getCounter();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return 0;
     }
 
     public void createTable() {
@@ -60,12 +71,13 @@ public class Presenter {
     }
 
     public void start() throws FileNotFoundException {
+        int counter = 0;
         while (true) {
             view.showMenu();
             int menuItem = view.selectMenuItem();
             switch (menuItem) {
                 case 1:
-                    addAnimal();
+                    counter += addAnimal();
                     break;
                 case 2:
                     createTable();
@@ -84,7 +96,9 @@ public class Presenter {
                     view.fromJsonFile();
                     break;
                 case 6:
-
+                    System.out.println("Значение счетчика: " +counter);
+                    break;
+                case 7:
                     System.exit(0);
                     break;
                 default:
