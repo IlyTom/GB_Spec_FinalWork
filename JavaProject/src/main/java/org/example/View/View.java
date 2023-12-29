@@ -1,13 +1,10 @@
 package org.example.View;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class View {
-    private JFrame frame;
-
     public String setName() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Введите имя животного: ");
@@ -54,6 +51,7 @@ public class View {
 
 
     public void showTable(Object[][] tableData, String[] columnNames){
+        System.out.println("=".repeat(50));
         int[] maxLengths = new int[columnNames.length];
         for (int i = 0; i < columnNames.length; i++) {
             maxLengths[i] = columnNames[i].length();
@@ -79,6 +77,7 @@ public class View {
             }
             System.out.println();
         }
+        System.out.println("=".repeat(50));
     }
 
     public void showMenu(){
@@ -91,4 +90,26 @@ public class View {
         int i = scanner.nextInt();
         return i;
     }
+
+    public int selectAnimalId(int maxSize){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Введите id питомца: ");
+        int id = scanner.nextInt();
+        while (true){
+            if (id < 0 || id > maxSize){
+                System.out.println("Введите правильный id питомца: ");
+                id = scanner.nextInt();
+            } else {
+                return id;
+            }
+        }
+    }
+    public void successfulAddCommand(){
+        System.out.println(ViewText.successfulAddCommand);
+    }
+
+    public void failedAddCommand(){
+        System.out.println(ViewText.failedAddCommand);
+    }
+
 }

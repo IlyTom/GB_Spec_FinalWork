@@ -7,7 +7,6 @@ import org.example.Model.Animals.AnimalsType;
 import org.example.Model.Builder.AnimalBuilder;
 import org.example.View.View;
 
-import javax.swing.*;
 import java.util.List;
 
 public class Presenter {
@@ -73,13 +72,32 @@ public class Presenter {
                     addAnimal();
                     break;
                 case 2:
+                    createTable();
+                    addCommand();
                     break;
                 case 3:
                     createTable();
+                    break;
+                case 4:
+                    //toJson();
                     break;
                 default:
                     break;
             }
         }
     }
+
+    public void addCommand(){
+        int indexAnimal = view.selectAnimalId(model.getAnimals().size());
+        List<String> command = view.setCommands();
+        if (model.getAnimals().get(indexAnimal).getCommands().addAll(command)){
+            view.successfulAddCommand();
+        }
+        else {
+            view.failedAddCommand();
+        }
+
+    }
+
+
 }

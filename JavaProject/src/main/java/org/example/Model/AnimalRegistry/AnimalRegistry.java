@@ -20,5 +20,11 @@ public class AnimalRegistry {
         return animals;
     }
 
+    public Animals getAnimal(int index){
+        return animals.get(index);
+    }
+
+
+
 
 }
