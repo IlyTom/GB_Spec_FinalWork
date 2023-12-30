@@ -104,8 +104,8 @@ public class View {
         Scanner scanner = new Scanner(System.in);
         int i = scanner.nextInt();
         while (true) {
-            if (i < 1 || i > 6) {
-                System.out.println("Введите правильный номер меню (1-6): ");
+            if (i < 1 || i > 7) {
+                System.out.println("Введите правильный номер меню (1-7): ");
                 i = scanner.nextInt();
             } else {
                 return i;
